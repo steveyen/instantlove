@@ -1,14 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Instantlove</title>
+  <title>instantlove</title>
   <%= stylesheet_link_tag :all %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
+<style>
+html, body {
+  height: 100%;
+}
+body {
+  font: 59.5%/1.4 "ff-tisa-web-pro-1",Cambria,Georgia, Times, serif;
+  margin: 0;
+  padding: 0 45px 0 45px;
+}
+h1 {
+  -webkit-transform: rotate(-0.01deg);
+  font-weight: 500;
+  font-style: italic;
+  padding-top: 12px;
+  font-size: 45px;
+}
+a {
+  color: #333;
+}
+.content {
+  width: 300px;
+  padding: 0 45px 0 30px;
+  color: #333;
+  word-spacing: 3px;
+  letter-spacing: 0.01em;
+  line-height: 25px;
+  font-size: 15.5px;
+}
+.footer {
+  padding: 400px 0px 45px 0px;
+}
+</style>
 </head>
 <body>
-
+<h1>a love letter</h1>
+<div class="content">
 <%= yield %>
-
+</div>
+<div class="footer">
+  brought to you by <a href="http://www.trimpath.com">trimpath</a>
+  using <a href="https://github.com/hayeah/rantly">rantly</a>
+</div>
 </body>
 </html>
