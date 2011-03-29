@@ -1,4 +1,57 @@
+<style>
+.msg span {
+  display: none;
+}
+.msg span.show {
+  display: inline;
+}
+</style>
+
 <p>
-<%=raw Rantly::Silly.love_letter(1).split("\n").join('</p><p>') %>
+<%=raw Rantly::Silly.love_letter(1).split("\n").join('</p><p class="msg">') %>
 </p>
 
+<script>
+var msgs = document.getElementsByTagName('p');
+var anim = 0;
+for (var i = 0; i < msgs.length; i++) {
+  if (msgs[i].className == "msg" &&
+      msgs[i].innerHTML.length > 0) {
+    var s = msgs[i].innerHTML.split(' ');
+    for (var j = 0; j < s.length; j++) {
+      s[j] = '<span id="anim_' + anim + '">' + s[j] + '</span>';
+      anim = anim + 1;
+    }
+    msgs[i].innerHTML = s.join(' ');
+  }
+}
+var curr = 0;
+function animate() {
+  if (curr < anim) {
+    var s = document.getElementById("anim_" + curr);
+    s.className = "show";
+    curr = curr + 1;
+    var t = 100 + Math.floor(Math.random() * 100);
+    if (s.innerHTML.match(/[,\.]/)) {
+      t = 500;
+    }
+    if ((window.location.search || "").indexOf("skip") > 0) {
+      t = 1;
+    }
+    setTimeout(animate, t);
+  } else {
+    if (document.getElementById("replyArea")) {
+      document.getElementById("replyArea").style.display = "block";
+    }
+  }
+}
+animate();
+</script>
+
+<!--
+<div id="replyArea" style="display:none;">
+  <label for="reply">Kindly waiting your reply...</label>
+  <textarea id="reply" name="reply"></textarea>
+  <a href="/">Reply</a>
+</div>
+-->
